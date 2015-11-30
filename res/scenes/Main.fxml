@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.web.*?>
+<?import java.lang.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.*?>
+
+<VBox prefHeight="110.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jp.toastkid.gui.jfx.MainController">
+  <children>
+     <VBox>
+        <children>
+            <HBox prefHeight="27.0" prefWidth="450.0">
+              <children>
+                <Label alignment="BASELINE_LEFT" minWidth="280.0" prefHeight="29.0" prefWidth="447.0" text="Keyword" />
+                <Button fx:id="hide" alignment="TOP_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#closeApplication" text="x" />
+              </children>
+            </HBox>
+            <HBox prefHeight="40.0" prefWidth="450.0">
+               <children>
+                  <TextField fx:id="input" minWidth="280.0" onAction="#search" prefHeight="31.0" prefWidth="375.0" />
+                  <Button fx:id="search" onAction="#search" text="Search" />
+               </children>
+            </HBox>
+        </children>
+     </VBox>
+    <HBox fx:id="browserArea" alignment="CENTER" managed="false" prefHeight="559.0" prefWidth="900.0" spacing="5.0">
+         <children>
+            <WebView fx:id="webView" nodeOrientation="INHERIT" prefHeight="400.0" prefWidth="600.0" />
+         </children>
+    </HBox>
+    <HBox alignment="BOTTOM_CENTER" prefHeight="25.0" spacing="5.0" VBox.vgrow="NEVER">
+      <children>
+        <HBox alignment="BOTTOM_LEFT" prefHeight="31.0" prefWidth="288.0" spacing="5.0" VBox.vgrow="NEVER">
+          <children>
+            <Label fx:id="status" maxWidth="-1.0" prefHeight="40.0" prefWidth="225.0" HBox.hgrow="ALWAYS">
+              <font>
+                <Font size="12.0" fx:id="x3" />
+              </font>
+              <textFill>
+                <Color blue="0" green="0.11" red="0" fx:id="x4" />
+              </textFill>
+            </Label>
+                  <Button fx:id="hide" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#hideBrowser" prefHeight="31.0" prefWidth="52.0" text="hide">
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                  </Button>
+          </children>
+        </HBox>
+        <HBox alignment="CENTER_RIGHT" prefHeight="25.0" spacing="5.0" VBox.vgrow="NEVER">
+          <children>
+            <ComboBox fx:id="style" minWidth="140.0" onAction="#callSetOnStyle">
+              <tooltip>
+                <Tooltip text="Style を選択します。" />
+              </tooltip>
+              <items>
+                <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="MODENA" />
+                  <String fx:value="CASPIAN" />
+                  <String fx:value="CHERRY" />
+                  <String fx:value="CRIMSON" />
+                  <String fx:value="CROW" />
+                  <String fx:value="DEMO" />
+                  <String fx:value="GOLD" />
+                  <String fx:value="GREEN" />
+                  <String fx:value="INDIGO" />
+                  <String fx:value="NAVY" />
+                  <String fx:value="APOLO" />
+                  <String fx:value="LEAF" />
+                  <String fx:value="SEA" />
+                </FXCollections>
+              </items>
+      	        </ComboBox>
+          </children>
+        </HBox>
+      </children>
+    </HBox>
+  </children>
+</VBox>

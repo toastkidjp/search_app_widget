@@ -1,0 +1,18 @@
+.root {
+    -fx-base: #FECAFC;
+    -fx-background: #FECAFC;
+    -fx-control-inner-background: #FFECFF;
+}
+
+.button {
+    -fx-border-style: null; 
+    -fx-background-radius: 0;
+}
+.toggle-button {
+    -fx-border-style: null; 
+    -fx-background-radius: 0;
+}
+.combo-box-base  {
+    -fx-border-style: null; 
+    -fx-background-radius: 0, 0, 0, 0;
+}
