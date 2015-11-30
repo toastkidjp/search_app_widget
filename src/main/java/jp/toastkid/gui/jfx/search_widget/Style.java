@@ -1,4 +1,4 @@
-package jp.toastkid.gui.jfx;
+package jp.toastkid.gui.jfx.search_widget;
 
 import java.io.File;
 import java.net.MalformedURLException;
