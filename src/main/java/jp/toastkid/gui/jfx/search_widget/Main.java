@@ -19,19 +19,25 @@ import javafx.stage.WindowEvent;
  * </a>
  */
 public final class Main extends Application {
-    /** fxml ファイル. */
+    /** App title. */
+    private static final String TITLE = "Search App Widget";
+
+    /** path/to/fxml. */
     private static final String FXML_PATH = "res/scenes/Main.fxml";
 
     /** コントローラ. */
     private MainController controller;
 
+    /** ドラッグ開始位置(x). */
     private double dragStartX;
+
+    /** ドラッグ開始位置(y). */
     private double dragStartY;
 
     @Override
     public void start(final Stage stage) {
         final long start = System.currentTimeMillis();
-        stage.setTitle("Search Widget");
+        stage.setTitle(TITLE);
         final Scene scene = readScene(stage);
         stage.setScene(scene);
         // move to background.
@@ -39,7 +45,6 @@ public final class Main extends Application {
 
         stage.initStyle(StageStyle.TRANSPARENT);
         // implement drag event.
-        scene.setFill(null);
         scene.setOnMousePressed((event) -> {
             dragStartX = event.getSceneX();
             dragStartY = event.getSceneY();
@@ -61,9 +66,9 @@ public final class Main extends Application {
     }
 
     /**
-     *
+     * read scene file.
      * @param stage
-     * @return
+     * @return scene
      */
     private final Scene readScene(final Stage stage) {
         try {

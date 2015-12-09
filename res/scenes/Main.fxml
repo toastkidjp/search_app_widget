@@ -5,19 +5,20 @@
 <?import javafx.collections.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
-<?import javafx.scene.image.*?>
+<?import javafx.scene.paint.*?>
 <?import javafx.geometry.*?>
 
-<VBox prefHeight="110.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="jp.toastkid.gui.jfx.MainController">
+<VBox prefHeight="110.0" prefWidth="450.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" 
+    fx:controller="jp.toastkid.gui.jfx.search_widget.MainController">
   <children>
      <VBox>
         <children>
             <HBox prefHeight="27.0" prefWidth="450.0">
               <children>
                 <Label alignment="BASELINE_LEFT" minWidth="280.0" prefHeight="29.0" prefWidth="447.0" text="Keyword" />
-                <Button fx:id="hide" alignment="TOP_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" onAction="#closeApplication" text="x" />
+                <Button fx:id="hide" alignment="TOP_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false"
+                    onAction="#closeApplication" text="x" />
               </children>
             </HBox>
             <HBox prefHeight="40.0" prefWidth="450.0">
@@ -45,11 +46,10 @@
                 <Color blue="0" green="0.11" red="0" fx:id="x4" />
               </textFill>
             </Label>
-                  <Button fx:id="hide" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false" onAction="#hideBrowser" prefHeight="31.0" prefWidth="52.0" text="hide">
-                     <HBox.margin>
-                        <Insets />
-                     </HBox.margin>
-                  </Button>
+            <Button fx:id="hide" alignment="CENTER_RIGHT" contentDisplay="CENTER" mnemonicParsing="false"
+                  onAction="#hideBrowser" prefHeight="31.0" prefWidth="52.0" text="hide">
+              <HBox.margin><Insets /></HBox.margin>
+            </Button>
           </children>
         </HBox>
         <HBox alignment="CENTER_RIGHT" prefHeight="25.0" spacing="5.0" VBox.vgrow="NEVER">

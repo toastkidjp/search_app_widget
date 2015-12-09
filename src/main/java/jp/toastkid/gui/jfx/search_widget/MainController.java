@@ -26,18 +26,24 @@ import org.apache.commons.lang3.StringUtils;
 
 
 /**
- * JavaFX の コントローラ.
- * @author Toast kid
+ * JavaFX app controller.
  *
+ * @author Toast kid
  */
 public final class MainController implements Initializable {
     /** default width. */
     private static final int DEFAULT_WIDTH = 450;
     /** default height. */
     private static final int DEFAULT_HEIGHT = 110;
+    /** expanded width. */
+    private static final int EXPANDED_WIDTH = 600;
+    /** expanded height. */
+    private static final int EXPANDED_HEIGHT = 400;
+
     /** Y! web search url. */
-    private static final String YSEARCH_URL
-        = "http://search.yahoo.co.jp/search?p=%s&search.x=1&fr=top_ga1_sa&tid=top_ga1_sa&ei=UTF-8&aq=&oq=";
+    private static final String YSEARCH_URL = "http://search.yahoo.co.jp/search"
+                + "?p=%s&search.x=1&fr=top_ga1_sa&tid=top_ga1_sa&ei=UTF-8&aq=&oq=";
+
     /** status label. */
     @FXML
     public Label status;
@@ -70,6 +76,18 @@ public final class MainController implements Initializable {
         );
     }
 
+    /**
+     * show WebView.
+     */
+    @FXML
+    protected void showBrowser() {
+        browserArea.visibleProperty().setValue(true);
+        browserArea.setManaged(true);
+    }
+
+    /**
+     * hide WebView.
+     */
     @FXML
     protected void hideBrowser() {
         browserArea.visibleProperty().setValue(false);
@@ -88,11 +106,9 @@ public final class MainController implements Initializable {
         }
         webView.getEngine().load(generateYSearchURL(text).get());
         if (!browserArea.managedProperty().getValue()) {
-            browserArea.visibleProperty().setValue(true);
-            browserArea.setManaged(true);
+            showBrowser();
+            setExpandedSize();
         }
-        stage.setWidth(600);
-        stage.setHeight(400);
     }
 
     /**
@@ -186,8 +202,19 @@ public final class MainController implements Initializable {
         status.setText(str);
     }
 
+    /**
+     * set default size.
+     */
     public void setDefaultSize() {
         stage.setWidth(DEFAULT_WIDTH);
         stage.setHeight(DEFAULT_HEIGHT);
+    }
+
+    /**
+     * set expanded size.
+     */
+    private void setExpandedSize() {
+        stage.setWidth(EXPANDED_WIDTH);
+        stage.setHeight(EXPANDED_HEIGHT);
     }
 }

@@ -2,10 +2,12 @@ apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: 'eclipse'
 
+import groovy.xml.NamespaceBuilder;
+
 sourceCompatibility = 1.8
 version = '0.0.1'
 
-def mainClassName = 'gui.jfx.Main'
+def mainClassName = 'jp.toastkid.gui.jfx.search_widget.Main'
 def defaultEncoding = 'UTF-8'
 def jdkVersion = '1.8'
 def javafxHome = System.getenv('JAVA_HOME')
@@ -31,6 +33,7 @@ configurations {
     //we do not want to have jfxrt.jar in the classpath when creating the jar,
     //therefore a seperate configuration is required
     providedCompile
+    antfx
 }
 
 dependencies {
@@ -55,10 +58,76 @@ eclipse {
     classpath.defaultOutputDir = file('build')
 }
 
+jar {
+	manifest {
+        attributes 'Main-Class' : mainClassName
+    }
+    from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
+    doLast {
+        deployFX()
+    }
+}
+
 //create some smarter looking start scripts
 startScripts {
     doLast {
         unixScript.text = "java -jar ../libs/$jar.archiveName"
         windowsScript.text = "java -jar ..\\libs\\$jar.archiveName"
+    }
+}
+
+/**
+ * @see <a href="http://feedtailor.jp/staff/2015/08/10/1013">超聖域：JavaFXのGradleビルド</a>
+ */
+task deployFX() << {
+    def jarName = "fx_app_widget"
+    def jarDir  = "${buildDir}/libs"
+    def jarFile = "${jarDir}/${jarName}-${version}.jar"
+    def distsDir = "./"
+    
+    def appWidth   = 1260
+    def appHeight  = 1024
+    def appName    = "AppWidget"
+    def venderName = "Toast Kid"
+
+    def fx = NamespaceBuilder.newInstance(ant, 'javafx:com.sun.javafx.tools.ant')
+    ant.taskdef(
+            resource: 'com/sun/javafx/tools/ant/antlib.xml',
+            uri: 'javafx:com.sun.javafx.tools.ant',
+            // src/main/deploy をクラスパスに追加
+            classpath: 'src/main/deploy:' + configurations.antfx.asPath)
+
+    fx.application(
+            id: jarName,
+            name: appName,
+            version: version,
+            mainClass: mainClassName)
+
+    copy {
+        into jarDir
+        from configurations.runtime
+    }
+
+    fx.jar(destfile: jarFile) {
+        application(refid: jarName)
+        fileset(dir: "${buildDir}/resources/main")
+        fileset(dir: "${buildDir}/classes/main")
+        resources {
+            fileset(dir: jarDir)
+        }
+    }
+
+    fx.deploy(
+            outdir: distsDir,
+            outfile: jarName,
+            width: appWidth,
+            height: appHeight,
+            nativeBundles: 'all',
+            verbose: true) {
+        application(refid: jarName)
+        resources {
+            fileset(dir: jarDir)
+        }
+        info(title: appName, vendor: venderName)
     }
 }
