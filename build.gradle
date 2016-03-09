@@ -37,6 +37,7 @@ configurations {
 }
 
 dependencies {
+    compile fileTree(dir: 'libs', include: '*.jar')
     providedCompile files("${javafxHome}/jre/lib/ext/jfxrt.jar")
     compile 'org.apache.commons:commons-lang3:3.4'
 
@@ -84,7 +85,7 @@ task deployFX() << {
     def jarDir  = "${buildDir}/libs"
     def jarFile = "${jarDir}/${jarName}-${version}.jar"
     def distsDir = "./"
-    
+
     def appWidth   = 1260
     def appHeight  = 1024
     def appName    = "AppWidget"
